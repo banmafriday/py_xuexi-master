@@ -3,6 +3,32 @@ try:
 except Exception as e:
     print("出现异常时执行的代码")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 else:
     print("没有出现异常时执行的代码")
 finally:
