@@ -1,0 +1,48 @@
+# 数据库操作
+import pymysql
+
+host = "localhost"
+port = 3306
+user = "root"
+password = "123456"
+db = "51db"
+charset = "utf8"
+
+
+# 连接数据库,返回连接对象
+def getConnection():
+    db = pymysql.connect(host=host, port=port, user=user, passwd=password, charset=charset)
+    return db
+
+
+# 查询数据
+def getData(sql):
+    db = getConnection()
+    cursor = db.cursor()
+    data = None  # 保存返回的数据
+    try:
+        cursor.execute(sql)
+        data = cursor.fetchall()
+    except Exception as e:
+        print("异常:", e)
+    finally:
+        cursor.close()
+        db.close()
+    return data
+
+
+# 更新数据
+def writeData(sql):
+    db = getConnection()
+    cursor = db.cursor()
+
+    try:
+        r = cursor.execute(sql)
+        data = cursor.fetchall()
+        db.commit()
+        print("------数据已更新-------",r)
+    except Exception as e:
+        print("异常:", e)
+    finally:
+        cursor.close()
+        db.close()
