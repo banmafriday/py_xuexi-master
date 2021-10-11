@@ -5,7 +5,7 @@ import orm
 
 
 def mian():
-    market.addProduct()
+    market.settle()
 
 
 if __name__ == "__main__":

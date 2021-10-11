@@ -22,8 +22,8 @@ def getProduct():
     data = orm.getData(sql)
     if data != None:
 
-        print("商品名称:", data[0][1], "单价:", data[0][3], "折扣:", data[0][3])
-        return data[0][1], data[0][2], data[0][3]
+        print("商品名称:", data[0][1], "单价:", data[0][2], "折扣:", data[0][3],"数量",data[0][4])
+        return data[0][1], data[0][2], data[0][3],data[0][4]
     else:
         print("商品不存在")
         return None
@@ -108,23 +108,33 @@ def settle():
     # 计算订单总金额、数量#在订单表中添加订单
     orderCount = 0
     orderAmount = 0
+    msg = 0 #保存订单是否有效
     while 1 == 1:
         data = getProduct()
         num = float(input("请输入商品数量:"))
         if data != None:
-            print(data)
-            print(data[1])
+            msg = 1
             print(data[2])
             print(data[3])
+            price = data[2]
+            discount=data[3]
 
-        #     amount = price*num*discount
-        #     orderCount +=num
-        #     orderAmount +=amount
-        #     print("当前添加了",num,"件!,金额",amount,"元")
-        # r = input("继续添加输入1,结算输入2")
-        # if 1==1:
-        #     continue
+            amount = price*num*discount
+            orderCount +=num
+            orderAmount +=amount
+            print("当前添加了",num,"件!,金额",amount,"元")
+        r = input("继续添加输入1,结算输入2")
+        if r=="1":
+            continue
         else:
-            print("---------已结算!----------")
+            print("-------------------")
             break
+
     print("您购买的总数量", orderCount, "件!总金额元", orderAmount, "元!")
+
+    # 添加商品
+    if msg==1:
+        oid = str(random.randint(1000,9999))
+        sql = "insert into orders(num,count,action) values ("+oid+","+str(orderCount)+","+str(orderAmount)+")"
+        orm.writeData(sql)
+        print("添加成功!!")
