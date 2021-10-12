@@ -1,48 +1,49 @@
-# Êı¾İ¿â²Ù×÷
+# coding:utf-8
+# æ•°æ®åº“æ“ä½œ
 import pymysql
 
 host = "localhost"
 port = 3306
 user = "root"
 password = "123456"
-db = "51db"
+dbname = "market"
 charset = "utf8"
 #
 
-# Á¬½ÓÊı¾İ¿â,·µ»ØÁ¬½Ó¶ÔÏó
+# è¿æ¥æ•°æ®åº“,è¿”å›è¿æ¥å¯¹è±¡
 def getConnection():
-    db = pymysql.connect(host=host, port=port, user=user, passwd=password, charset=charset)
+    db = pymysql.connect(host=host, port=port, user=user, passwd=password, db=dbname, charset=charset)
     return db
 
 
-# ²éÑ¯Êı¾İ
+# æŸ¥è¯¢æ•°æ®
 def getData(sql):
     db = getConnection()
     cursor = db.cursor()
-    data = None  # ±£´æ·µ»ØµÄÊı¾İ
+    data = None  # ä¿å­˜è¿”å›çš„æ•°æ®
     try:
         cursor.execute(sql)
         data = cursor.fetchall()
     except Exception as e:
-        print("Òì³£:", e)
+        print("å¼‚å¸¸:", e)
     finally:
         cursor.close()
         db.close()
     return data
 
 
-# ¸üĞÂÊı¾İ
+# æ›´æ–°æ•°æ®
 def writeData(sql):
     db = getConnection()
     cursor = db.cursor()
-
+    r = 0
     try:
         r = cursor.execute(sql)
-        data = cursor.fetchall()
         db.commit()
-        print("------Êı¾İÒÑ¸üĞÂ-------",r)
+        print("------æ•°æ®å·²æ›´æ–°-------", r)
     except Exception as e:
-        print("Òì³£:", e)
+        print("å¼‚å¸¸:", e)
     finally:
         cursor.close()
         db.close()
+    return r  #è¿”å›å—å½±å“çš„è¡Œæ•°
