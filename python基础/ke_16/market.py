@@ -135,6 +135,6 @@ def settle():
     # 添加商品
     if msg==1:
         oid = str(random.randint(1000,9999))
-        sql = "insert into orders(num,count,action) values ("+oid+","+str(orderCount)+","+str(orderAmount)+")"
+        sql = "insert into orders(num,count,amount) values ("+oid+","+str(orderCount)+","+str(orderAmount)+")"
         orm.writeData(sql)
         print("添加成功!!")

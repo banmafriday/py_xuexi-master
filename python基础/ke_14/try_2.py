@@ -1,5 +1,5 @@
 try:
-    print("可能出来异常的代码")
+    print("可能出来异常执行的代码")
 except Exception as e:
     print("出现异常时执行的代码")
 
