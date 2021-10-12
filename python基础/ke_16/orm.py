@@ -8,7 +8,7 @@ user = "root"
 password = "123456"
 dbname = "market"
 charset = "utf8"
-
+#
 
 # 连接数据库,返回连接对象
 def getConnection():
