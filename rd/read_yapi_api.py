@@ -33,7 +33,6 @@ def login():
     response = s.post(url, headers=headers, data=d)
     result = response.cookies
     print(result)
-    se= result.move("3")
 
 login()
 
