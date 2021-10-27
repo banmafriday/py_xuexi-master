@@ -7,7 +7,7 @@ import re
 # 断点调试
 
 class Spider():
-    url = "https://www.douyu.com/g_LOL"
+    url = "https://www.huya.com/g/lol"
     root_pattern = '<div class="DyListCover-info">[\s\S]*?</div>'
 
 
